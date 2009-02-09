@@ -1,0 +1,14 @@
+*.elc
+*~
+auto-save-list/*
+emms/*
+desktop/*
+backups/*
+snippets/*
+.emms-history
+.emms-score
+.ido.last
+_recentf
+init.el.before_ecb_2.32*
+tramp
+w3m-session

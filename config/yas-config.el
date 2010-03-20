@@ -2,7 +2,7 @@
 ;;(require 'yasnippet)
 ;;(yas/initialize)
 ;;load snippet,basically from yas package
-(yas/load-directory "~/.emacs.d/snippets")
+;(yas/load-directory "~/.emacs.d/snippets")
 ;;(define-key yas/minor-mode-map (kbd "C-c TAB") 'yas/list-snippets)
 (defun yas/list-snippets (&optional show-all)
   "show possible yasnippets starting with current string or list all yasnippets for this mode if prefix-arg is given."

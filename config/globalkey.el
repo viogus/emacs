@@ -1,5 +1,5 @@
 ;; -*- mode: Emacs-Lisp -*-
-;; Time-stamp: <2009-01-21 22:35:37 +800 Zhixun LIN>
+;; Time-stamp: <2010-01-16 01:20:36 +800 Zhixun LIN>
 
 ;;; UNSET keys
 ;;;-------------------------------------
@@ -32,7 +32,7 @@
 ;;dev-studio-beginning-of-line
 ;;borrowed from the idea of borland dev studio's editor behaviour
 ;;
-(global-set-key "\C-a" 'dev-studio-beginning-of-line)
+;(global-set-key "\C-a" 'dev-studio-beginning-of-line)
 
 ;;ffap is useful
 ;;

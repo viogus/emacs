@@ -1,5 +1,5 @@
 ;; -*- mode: Emacs-Lisp -*-
-;; Time-stamp: <2009-01-21 22:45:37 +800 Zhixun LIN>
+;; Time-stamp: <2010-01-28 06:05:44 +800 Zhixun LIN>
 (autoload 'eim-use-package "eim" "Another emacs input method")
 ;; Tooltip 暂时还不好用
 (setq eim-use-tooltip nil)

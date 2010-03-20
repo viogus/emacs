@@ -1,5 +1,5 @@
 ;; -*- mode: Emacs-Lisp -*-
-;; Time-stamp: <2009-01-01 13:19:13  Zhixun LIN>
+;; Time-stamp: <2010-01-17 02:02:36 +800 Zhixun LIN>
 ;;关闭起动时的那个“开机画面”。 
 (setq inhibit-startup-message t)
 (setq initial-scratch-message nil)
@@ -33,9 +33,9 @@
        (setq x-stretch-cursor nil)
        ;; 如果设置为 t，光标在 TAB 字符上会显示为一个大方块 :)。
 
-       (scroll-bar-mode -1)
-       (tool-bar-mode -1)
-       (menu-bar-mode -1)
+       ;(scroll-bar-mode -1)
+       ;(tool-bar-mode -1)
+       ;(menu-bar-mode -1)
        ;; 不要 tool-bar 和 scroll-bar。
 
        (setq default-frame-alist
@@ -52,8 +52,8 @@
        ;;(set-frame-font "Bitstream Vera Sans Mono-9")
        ;;(set-frame-font "Lucida Typewriter Std-9")
        ;;(set-frame-font "Monaco-10")
-       (set-fontset-font (frame-parameter nil 'font)
-			 'unicode  '("microsoft YaHei" . "unicode-bmp"))
+       ;(set-fontset-font (frame-parameter nil 'font)
+	;		 'unicode  '("微米黑" . "unicode-bmp"))
 ;;
        ;; 其他颜色设置。
        (if (facep 'mode-line)

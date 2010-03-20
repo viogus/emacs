@@ -1,5 +1,5 @@
 ;; -*- mode: Emacs-Lisp -*-
-;; Time-stamp: <2009-01-08 13:42:58 +800 Zhixun LIN>
+;; Time-stamp: <2010-01-17 06:23:47 +800 Zhixun LIN>
 ;;
 ;; ERC
 ;;----------------------------
@@ -23,7 +23,7 @@
                (erc-message "PRIVMSG" "NickServ identify password")))
 ;; channels
 (setq erc-autojoin-channels-alist
-       '(("freenode.net" "#emacs" "#gentoo-cn" )))
+       '(("freenode.net" "#emacs" "#gentoo-cn" "#funtoo" )))
 
 ;; new buffer with private messages
 (setq erc-auto-query 'buffer)

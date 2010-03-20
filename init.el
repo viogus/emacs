@@ -1,5 +1,5 @@
 ;; -*- mode: Emacs-Lisp -*-
-;; Time-stamp: <2009-02-07 02:47:02 +800 Zhixun LIN>
+;; Time-stamp: <2010-01-28 18:25:55 +800 Zhixun LIN>
 
 ;; packages :local emacs packages
 ;; config   :my config files
@@ -29,9 +29,9 @@
 (setq server-raise-frame t)
 ;;for stumpwm usage
 ;;use es for EDITOR
-(if window-system
-      (add-hook 'server-done-hook
-                (lambda () (shell-command "stumpish 'eval (stumpwm::return-es-called-win stumpwm::*es-win*)'"))))
+;(if window-system
+;      (add-hook 'server-done-hook
+;                (lambda () (shell-command "stumpish 'eval (stumpwm::return-es-called-win stumpwm::*es-win*)'"))))
 
 ;;utf8 settings
 ;; utf8 preferred
@@ -39,7 +39,7 @@
 ;;for usage of version control
 (setq require-final-newline t)
 ;;slime
-(setq inferior-lisp-program "sbcl")
+;(setq inferior-lisp-program "sbcl")
 
 ;;vc
 (require 'git)

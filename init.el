@@ -1,5 +1,5 @@
 ;; -*- mode: Emacs-Lisp -*-
-;; Time-stamp: <2010-03-21 03:41:24 +800 Zhixun LIN>
+;; Time-stamp: <2010-03-21 04:34:08 +800 Zhixun LIN>
 
 ;; packages :local emacs packages
 ;; config   :my config files
@@ -73,26 +73,6 @@
     (copy-region-as-kill beg end))
   )
 
-;Change cutting behaviour:
-;"Many times you'll do a kill-line command with the only intention of getting
-;the contents of the line into the killring. Here's an idea stolen from Slickedit,
-;if you press copy or cut when no region is active you'll copy or cut the current line:"
-;<http://www.zafar.se/bkz/Articles/EmacsTips>
-(defadvice kill-ring-save (before slickcopy activate compile)
-  "When called interactively with no active region, copy a single line instead."
-  (interactive
-   (if mark-active (list (region-beginning) (region-end))
-     (list (line-beginning-position)
-           (line-beginning-position 2)))))
-
-(defadvice kill-region (before slickcut activate compile)
-  "When called interactively with no active region, kill a single line instead."
-  (interactive
-   (if mark-active (list (region-beginning) (region-end))
-     (list (line-beginning-position)
-           (line-beginning-position 2)))))
-
-
 
 ;;use w3m to browse common lisp hyperspec
 ;;but use firefox for normal web browsing
@@ -107,17 +87,3 @@
             'w3m-browse-url
           'browse-url-firefox))
   (message "%s" browse-url-browser-function))
-
-;;;;auto compile .el files after modification
-(defun auto-byte-compile-el-file ()
-  (let* ((filename (file-truename buffer-file-name)))
-    (cond ((string= (substring filename                                       
-            (- (length filename) 3)) ".el")
-          (byte-compile-file filename)))))
-(add-hook 'after-save-hook 'auto-byte-compile-el-file)
-
-
-
-
-;(require 'autoinsert)
-

@@ -1,5 +1,5 @@
 ;; -*- mode: Emacs-Lisp -*-
-;; Time-stamp: <2009-02-07 23:01:54 +800 Zhixun LIN>
+;; Time-stamp: <2010-03-21 04:32:51 +800 Zhixun LIN>
 ;;用y/n代替yes/no
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq outline-minor-mode-prefix (kbd "C-o"))
@@ -160,6 +160,13 @@ that was stored with ska-point-to-register."
 ;;;(defconst dotemacs-basic-conf-dir "~/.emacs.d/config/")
 ;(defconst dotemacs-ext-elisp-dir "~/.emacs.d/config/ext-elisp/")
 ;(defconst dotemacs-program-dir "~/.emacs.d/config/program/")
+;;;;auto compile .el files after modification
+(defun auto-byte-compile-el-file ()
+  (let* ((filename (file-truename buffer-file-name)))
+    (cond ((string= (substring filename                                       
+            (- (length filename) 3)) ".el")
+          (byte-compile-file filename)))))
+(add-hook 'after-save-hook 'auto-byte-compile-el-file)
 
 ;; go to char
 ;; C-c a
@@ -340,6 +347,27 @@ occurence of CHAR."
 ;(global-set-key  "\C-zc" 'multi-eshell)
 ;(global-set-key  "\C-zn" 'multi-eshell-switch)
 ;(setq multi-eshell-shell-function '(eshell))
+
+;Change cutting behaviour:
+;"Many times you'll do a kill-line command with the only intention of getting
+;the contents of the line into the killring. Here's an idea stolen from Slickedit,
+;if you press copy or cut when no region is active you'll copy or cut the current line:"
+;<http://www.zafar.se/bkz/Articles/EmacsTips>
+(defadvice kill-ring-save (before slickcopy activate compile)
+  "When called interactively with no active region, copy a single line instead."
+  (interactive
+   (if mark-active (list (region-beginning) (region-end))
+     (list (line-beginning-position)
+           (line-beginning-position 2)))))
+
+(defadvice kill-region (before slickcut activate compile)
+  "When called interactively with no active region, kill a single line instead."
+  (interactive
+   (if mark-active (list (region-beginning) (region-end))
+     (list (line-beginning-position)
+           (line-beginning-position 2)))))
+
+
 
 
 ;;for work with mozrepl

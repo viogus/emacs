@@ -1,5 +1,5 @@
 ;; -*- mode: Emacs-Lisp -*-
-;; Time-stamp: <2010-01-28 18:25:55 +800 Zhixun LIN>
+;; Time-stamp: <2010-03-21 03:41:24 +800 Zhixun LIN>
 
 ;; packages :local emacs packages
 ;; config   :my config files
@@ -41,12 +41,6 @@
 ;;slime
 ;(setq inferior-lisp-program "sbcl")
 
-;;vc
-(require 'git)
-(add-to-list 'vc-handled-backends 'GIT)
-(autoload 'git-status "git" "Entry point into git-status mode." t)
-(autoload 'git-blame-mode "git-blame"
-  "Minor mode for incremental blame for Git." t)
 (setq initial-scratch-message nil)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;(require 'ecb)
@@ -78,7 +72,6 @@
 	(end (progn (forward-paragraph arg) (point))))
     (copy-region-as-kill beg end))
   )
-
 
 ;Change cutting behaviour:
 ;"Many times you'll do a kill-line command with the only intention of getting
@@ -114,7 +107,6 @@
             'w3m-browse-url
           'browse-url-firefox))
   (message "%s" browse-url-browser-function))
-
 
 ;;;;auto compile .el files after modification
 (defun auto-byte-compile-el-file ()

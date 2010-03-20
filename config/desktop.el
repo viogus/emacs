@@ -1,12 +1,12 @@
 ;; -*- mode: Emacs-Lisp -*-
-;; Time-stamp: <2008-12-25 17:10:33  Zhixun LIN>
+;; Time-stamp: <2010-03-21 04:18:12 +800 Zhixun LIN>
 ;; desktop support
 (require 'desktop)
 (setq desktop-base-file-name ".emacs_desktop")
 (setq desktop-base-lock-name ".emacs_desktop.lock")
-;(setq desktop-path '("." "~/.emacs.d/"))
-;(desktop-save-mode)
-;not open
+					;(setq desktop-path '("." "~/.emacs.d/"))
+					;(desktop-save-mode)
+					;not open
 (setq desktop-buffers-not-to-save
       (concat "\\(" "^nn\\.a[0-9]+\\|\\.log\\|(ftp)\\|^tags\\|^TAGS"
 	      "\\|\\.emacs.*\\|\\.diary\\|\\.newsrc-dribble\\|\\.bbdb" 
@@ -39,5 +39,22 @@
 		  (run-with-timer 5 300 'autosave-desktop))))
 
 
+;;; desktop-override-stale-locks.el begins here
+(defun emacs-process-p (pid)
+  "If pid is the process ID of an emacs process, return t, else nil.
+Also returns nil if pid is nil."
+  (when pid
+    (let* ((cmdline-file (concat "/proc/" (int-to-string pid) "/cmdline")))
+      (when (file-exists-p cmdline-file)
+	(with-temp-buffer
+	  (insert-file-contents-literally cmdline-file)
+	  (goto-char (point-min))
+	  (search-forward "emacs" nil t)
+	  pid)))))
 
+(defadvice desktop-owner (after pry-from-cold-dead-hands activate)
+  "Don't allow dead emacsen to own the desktop file."
+  (when (not (emacs-process-p ad-return-value))
+    (setq ad-return-value nil)))
+;;; desktop-override-stale-locks.el ends here
 

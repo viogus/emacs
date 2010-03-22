@@ -1,5 +1,5 @@
 ;; -*- mode: Emacs-Lisp -*-
-;; Time-stamp: <2010-03-23 06:32:08 +800 Zhixun LIN>
+;; Time-stamp: <2010-03-23 07:42:10 +800 Zhixun LIN>
 ;;用y/n代替yes/no
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq outline-minor-mode-prefix (kbd "C-o"))
@@ -149,18 +149,6 @@ that was stored with ska-point-to-register."
 
 
 ;;自动在修改之后编译之
-;;(add-hook 'after-save-hook
-;;	  (lambda ()
-;;	    (mapcar
-;;	     (lambda (file)
-;;	       (setq file (expand-file-name file))
-;;	       (when (string= file (buffer-file-name))
-;;		 (save-excursion (byte-compile-file file))))
-;;             '("~/.emacs.d/init.el" "~/.gnus" "~/.emacs.d/config/.el"))))
-;;;(defconst dotemacs-basic-conf-dir "~/.emacs.d/config/")
-;(defconst dotemacs-ext-elisp-dir "~/.emacs.d/config/ext-elisp/")
-;(defconst dotemacs-program-dir "~/.emacs.d/config/program/")
-;;;;auto compile .el files after modification
 (defun auto-byte-compile-el-file ()
   (let* ((filename (file-truename buffer-file-name)))
     (cond ((string= (substring filename                                       
@@ -343,10 +331,6 @@ occurence of CHAR."
   (require 'emms-init))
 ;(global-set-key "\C-cme" 'emms)
 
-;(require 'multi-eshell)
-;(global-set-key  "\C-zc" 'multi-eshell)
-;(global-set-key  "\C-zn" 'multi-eshell-switch)
-;(setq multi-eshell-shell-function '(eshell))
 
 ;Change cutting behaviour:
 ;"Many times you'll do a kill-line command with the only intention of getting
@@ -366,8 +350,20 @@ occurence of CHAR."
    (if mark-active (list (region-beginning) (region-end))
      (list (line-beginning-position)
            (line-beginning-position 2)))))
-
+;;sudoku is funny
 (require 'sudoku)
+
+;;auto close compilation buff
+(setq compilation-finish-functions
+      (lambda (buf str)
+        (when (and (string= (buffer-name buf) "*Compilation*")
+                 (not (string-match "exited abnormally" str)))
+            (run-at-time 0.5 nil 'delete-windows-on buf)
+          )))
+(setq compilation-window-height 15)
+(setq compilation-auto-jump-to-first-error t)
+(setq compilation-scroll-output t)
+
 ;;for work with mozrepl
 (defun moz-conkeror-setup ()
   (comint-send-string inferior-moz-buffer

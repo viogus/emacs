@@ -1,5 +1,5 @@
 ;; -*- mode: Emacs-Lisp -*-
-;; Time-stamp: <2010-03-23 06:29:42 +800 Zhixun LIN>
+;; Time-stamp: <2010-03-23 06:52:56 +800 Zhixun LIN>
 ;;关闭起动时的那个“开机画面”。 
 (setq inhibit-startup-message t)
 (setq initial-scratch-message nil)
@@ -24,7 +24,7 @@
 
       ((eq window-system 'x)
        ;; 如果在 X Window 中
-;;       (global-set-key (kbd "C--") 'undo)
+       ;;       (global-set-key (kbd "C--") 'undo)
        ;; Console 中习惯了 C-_ 作为 Undo，不妨把这个也改过来。
 
        (setq visible-bell t)
@@ -39,7 +39,7 @@
        ;; 不要 tool-bar 和 scroll-bar。
 
        (require 'tmtheme)
-(setq tmtheme-directory "~/.emacs.d/tmthemes")
-(tmtheme-scan)
-(tmtheme-Blackboard)
-            ))
+       (setq tmtheme-directory "~/.emacs.d/tmthemes")
+       (tmtheme-scan)
+       (tmtheme-Blackboard)
+       ))

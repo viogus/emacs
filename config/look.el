@@ -1,5 +1,5 @@
 ;; -*- mode: Emacs-Lisp -*-
-;; Time-stamp: <2010-01-17 02:02:36 +800 Zhixun LIN>
+;; Time-stamp: <2010-03-23 06:29:42 +800 Zhixun LIN>
 ;;关闭起动时的那个“开机画面”。 
 (setq inhibit-startup-message t)
 (setq initial-scratch-message nil)
@@ -33,38 +33,13 @@
        (setq x-stretch-cursor nil)
        ;; 如果设置为 t，光标在 TAB 字符上会显示为一个大方块 :)。
 
-       ;(scroll-bar-mode -1)
-       ;(tool-bar-mode -1)
-       ;(menu-bar-mode -1)
+       (scroll-bar-mode -1)
+       (tool-bar-mode -1)
+       (menu-bar-mode -1)
        ;; 不要 tool-bar 和 scroll-bar。
 
-       (setq default-frame-alist
-             ;; 缺省的颜色设置。
-             `(;(vertical-scroll-bars)
-               ;(top . 0) (left . 0) (width . 80) (height . 37)
-               (background-color . "DarkSlateGrey")
-               (foreground-color . "Wheat")
-               (cursor-color     . "gold1")
-               (mouse-color      . "gold1")))
-       ;; setup default font and init windows position
-       ;;set it in .Xdefault
-       ;(set-frame-font "Lucida Sans Typewriter Std-9")
-       ;;(set-frame-font "Bitstream Vera Sans Mono-9")
-       ;;(set-frame-font "Lucida Typewriter Std-9")
-       ;;(set-frame-font "Monaco-10")
-       ;(set-fontset-font (frame-parameter nil 'font)
-	;		 'unicode  '("微米黑" . "unicode-bmp"))
-;;
-       ;; 其他颜色设置。
-       (if (facep 'mode-line)
-           (set-face-attribute 'mode-line nil :foreground "DarkSlateGrey" :background "Wheat"))
-       (if (facep 'fringe)
-           (set-face-attribute 'fringe nil :foreground "limegreen" :background "gray30"))
-       (if (facep 'tool-bar)
-           (set-face-background 'tool-bar "DarkSlateGrey"))
-       (if (facep 'menu)
-           (face-spec-set 'menu '((t (:foreground "Wheat" :background "DarkSlateGrey")))))
-       (if (facep 'trailing-whitespace)
-           (set-face-background 'trailing-whitespace "SeaGreen1"))
-       (if (facep 'minibuffer-prompt)
-           (face-spec-set 'minibuffer-prompt '((t (:foreground "cyan")))))))
+       (require 'tmtheme)
+(setq tmtheme-directory "~/.emacs.d/tmthemes")
+(tmtheme-scan)
+(tmtheme-Blackboard)
+            ))

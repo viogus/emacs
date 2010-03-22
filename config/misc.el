@@ -1,5 +1,5 @@
 ;; -*- mode: Emacs-Lisp -*-
-;; Time-stamp: <2010-03-21 04:32:51 +800 Zhixun LIN>
+;; Time-stamp: <2010-03-23 06:29:56 +800 Zhixun LIN>
 ;;用y/n代替yes/no
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq outline-minor-mode-prefix (kbd "C-o"))
@@ -366,7 +366,6 @@ occurence of CHAR."
    (if mark-active (list (region-beginning) (region-end))
      (list (line-beginning-position)
            (line-beginning-position 2)))))
-
 
 
 

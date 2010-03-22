@@ -1,5 +1,5 @@
 ;; -*- mode: Emacs-Lisp -*-
-;; Time-stamp: <2010-03-21 04:34:08 +800 Zhixun LIN>
+;; Time-stamp: <2010-03-23 06:28:09 +800 Zhixun LIN>
 
 ;; packages :local emacs packages
 ;; config   :my config files
@@ -41,7 +41,6 @@
 ;;slime
 ;(setq inferior-lisp-program "sbcl")
 
-(setq initial-scratch-message nil)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;(require 'ecb)
 ;(require 'xcscope)

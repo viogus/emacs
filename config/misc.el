@@ -1,5 +1,5 @@
 ;; -*- mode: Emacs-Lisp -*-
-;; Time-stamp: <2010-03-23 06:29:56 +800 Zhixun LIN>
+;; Time-stamp: <2010-03-23 06:32:08 +800 Zhixun LIN>
 ;;用y/n代替yes/no
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq outline-minor-mode-prefix (kbd "C-o"))
@@ -367,8 +367,7 @@ occurence of CHAR."
      (list (line-beginning-position)
            (line-beginning-position 2)))))
 
-
-
+(require 'sudoku)
 ;;for work with mozrepl
 (defun moz-conkeror-setup ()
   (comint-send-string inferior-moz-buffer

@@ -1,5 +1,5 @@
 ;; -*- mode: Emacs-Lisp -*-
-;; Time-stamp: <2010-03-23 06:28:09 +800 Zhixun LIN>
+;; Time-stamp: <2010-03-24 06:43:49 +800 Zhixun LIN>
 
 ;; packages :local emacs packages
 ;; config   :my config files
@@ -9,7 +9,7 @@
 ;(when (file-exists-p "/usr/share/emacs/site-lisp/site-gentoo.el")
 ;  (load "/usr/share/emacs/site-lisp/site-gentoo"))
 ;;gnus init file
-;(setq gnus-init-file "~/.emacs.d/gnus.el")
+(setq gnus-init-file "~/.emacs.d/gnus.el")
 
 (defun my-add-subdirs-to-load-path (dir) 
   (let ((default-directory (concat dir "/"))) 

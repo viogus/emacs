@@ -30,26 +30,50 @@
 (add-to-list 'backup-directory-alist
              (cons "." "~/.emacs.d/backups/"))
 (setq tramp-backup-directory-alist backup-directory-alist)
+
 (defun th-rename-tramp-buffer ()
-    (when (file-remote-p (buffer-file-name))
-          (rename-buffer
-	        (format "%s:%s"
-			             (file-remote-p (buffer-file-name) 'method)
-				                  (buffer-name)))))
+  (when (file-remote-p (buffer-file-name))
+    (rename-buffer
+     (format "%s:%s"
+	     (file-remote-p (buffer-file-name) 'method)
+	     (buffer-name)))))
 
 (add-hook 'find-file-hook
-	            'th-rename-tramp-buffer)
+	  'th-rename-tramp-buffer)
 
 (defadvice find-file (around th-find-file activate)
-    "Open FILENAME using tramp's sudo method if it's read-only."
-      (if (and (not (file-writable-p (ad-get-arg 0)))
-	                  (y-or-n-p (concat "File "
-					                                 (ad-get-arg 0)
-									                              " is read-only.  Open it as root? ")))
-	        (th-find-file-sudo (ad-get-arg 0))
-	    ad-do-it))
+  "Open FILENAME using tramp's sudo method if it's read-only."
+  (if (and (not (file-writable-p (ad-get-arg 0)))
+	   (y-or-n-p (concat "File "
+			     (ad-get-arg 0)
+			     " is read-only.  Open it as root? ")))
+      (th-find-file-sudo (ad-get-arg 0))
+    ad-do-it))
 
 (defun th-find-file-sudo (file)
-    "Opens FILE with root privileges."
-      (interactive "F")
-        (set-buffer (find-file (concat "/sudo::" file))))
+  "Opens FILE with root privileges."
+  (interactive "F")
+  (set-buffer (find-file (concat "/sudo::" file))))
+
+(defadvice find-file (around my-find-file activate)
+  "Open FILENAME using tramp's sudo method if it’s read-only and not owned by current user."
+   (let* ((my-filename (ad-get-arg 0))
+	  (file-owner-uid (nth 2 (file-attributes my-filename))))
+     (if (not (file-writable-p my-filename))
+	 (if (and (not (= file-owner-uid (user-uid)))
+		  (y-or-n-p (concat "File " my-filename " is read-only. Open it as root? ")))
+	     (progn
+	       (ad-set-arg 0 (concat "/sudo::" my-filename))
+	       ad-do-it
+	       (rename-buffer
+		(format "%s:%s"
+			 (file-remote-p (buffer-file-name) 'method)
+			 (buffer-name))))
+	   (if (and (= file-owner-uid (user-uid))
+		    (y-or-n-p (concat "File " my-filename " is read-only. Make buffer writable? ")))
+	       (progn
+		 ad-do-it
+		 (toggle-read-only -1))))
+       ad-do-it)))
+(defun wl-sudo-find-file (file dir)
+  (find-file (concat "/sudo:localhost:" (expand-file-name file dir))))

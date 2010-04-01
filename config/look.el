@@ -1,5 +1,5 @@
 ;; -*- mode: Emacs-Lisp -*-
-;; Time-stamp: <2010-04-02 01:09:26 +800 Zhixun LIN>
+;; Time-stamp: <2010-04-02 03:47:33 +800 Zhixun LIN>
 ;;关闭起动时的那个“开机画面”。 
 (setq inhibit-startup-message t)
 (setq initial-scratch-message nil)
@@ -24,7 +24,7 @@
          ;; 设置 log-view 的颜色。
          '(progn
             (set-face-attribute 'log-view-file-face nil :foreground "blue" :weight 'bold)
-            (set-face-attribute 'log-view-message-face nil :foreground "yellow" :weight 'bold))))
+            (set-face-attribute 'log-view-message-face nil :foreground "yellow" :weight 'bold)))
 
       ((eq window-system 'x)
        ;; 如果在 X Window 中
@@ -46,4 +46,4 @@
        (setq tmtheme-directory "~/.emacs.d/tmthemes")
        (tmtheme-scan)
        (tmtheme-Blackboard)
-       ))
+       )))

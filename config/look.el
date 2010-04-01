@@ -1,5 +1,5 @@
 ;; -*- mode: Emacs-Lisp -*-
-;; Time-stamp: <2010-03-23 06:52:56 +800 Zhixun LIN>
+;; Time-stamp: <2010-04-02 01:09:26 +800 Zhixun LIN>
 ;;关闭起动时的那个“开机画面”。 
 (setq inhibit-startup-message t)
 (setq initial-scratch-message nil)
@@ -12,6 +12,10 @@
 ;; 在标题栏显示buffer的名称
 (setq frame-title-format "emacs@%b")
 
+;;need none of the bars...
+(scroll-bar-mode -1)
+(tool-bar-mode -1)
+(menu-bar-mode -1)
 (cond ((not window-system)
        ;; 如果不在 window 环境中(字符界面时)
        (setq frame-background-mode 'dark)

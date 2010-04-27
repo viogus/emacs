@@ -1,5 +1,6 @@
 ;;Revert buffer with tramp sudo without losing changes already made
 (require 'tramp)
+
 (defun xwl-revert-buffer-with-sudo ()
   "Revert buffer using tramp sudo.
    This will also reserve changes already made by a non-root user."
@@ -38,8 +39,8 @@
 	     (file-remote-p (buffer-file-name) 'method)
 	     (buffer-name)))))
 
-(add-hook 'find-file-hook
-	  'th-rename-tramp-buffer)
+;(add-hook 'find-file-hook
+;	  'th-rename-tramp-buffer)
 
 (defadvice find-file (around th-find-file activate)
   "Open FILENAME using tramp's sudo method if it's read-only."
@@ -49,6 +50,9 @@
 			     " is read-only.  Open it as root? ")))
       (th-find-file-sudo (ad-get-arg 0))
     ad-do-it))
+
+(defun viogus-sudo-find-file (file dir)
+  (find-file (concat "/sudo:localhost:" (expand-file-name file dir))))
 
 (defun th-find-file-sudo (file)
   "Opens FILE with root privileges."
@@ -75,5 +79,4 @@
 		 ad-do-it
 		 (toggle-read-only -1))))
        ad-do-it)))
-(defun wl-sudo-find-file (file dir)
-  (find-file (concat "/sudo:localhost:" (expand-file-name file dir))))
+

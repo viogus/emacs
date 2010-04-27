@@ -1,5 +1,5 @@
 ;; -*- mode: Emacs-Lisp -*-
-;; Time-stamp: <2010-03-23 07:42:10 +800 Zhixun LIN>
+;; Time-stamp: <2010-04-13 02:48:13 +800 Zhixun LIN>
 ;;用y/n代替yes/no
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq outline-minor-mode-prefix (kbd "C-o"))

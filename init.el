@@ -1,5 +1,5 @@
 ;; -*- mode: Emacs-Lisp -*-
-;; Time-stamp: <2010-03-24 06:43:49 +800 Zhixun LIN>
+;; Time-stamp: <2010-04-20 13:17:03 +800 Zhixun LIN>
 
 ;; packages :local emacs packages
 ;; config   :my config files
@@ -11,13 +11,14 @@
 ;;gnus init file
 (setq gnus-init-file "~/.emacs.d/gnus.el")
 
+;;useful lisp package under site-lisp directory
 (defun my-add-subdirs-to-load-path (dir) 
   (let ((default-directory (concat dir "/"))) 
     (setq load-path (cons dir load-path)) 
     (normal-top-level-add-subdirs-to-load-path)))
-
 (my-add-subdirs-to-load-path "~/.emacs.d/site-lisp")
-;;(add-to-list 'load-path "~/.emacs.d/site-lisp")
+
+;;split my config files under config directory
 (mapc 'load (directory-files "~/.emacs.d/config" t "\.elc$"))
 (put 'narrow-to-region 'disabled nil)
 ;;personal 
@@ -27,6 +28,7 @@
 ;;server
 (server-start)
 (setq server-raise-frame t)
+
 ;;for stumpwm usage
 ;;use es for EDITOR
 ;(if window-system
@@ -72,7 +74,6 @@
     (copy-region-as-kill beg end))
   )
 
-
 ;;use w3m to browse common lisp hyperspec
 ;;but use firefox for normal web browsing
 (setq browse-url-browser-function '(("hyperspec" . w3m-browse-url)
@@ -86,3 +87,5 @@
             'w3m-browse-url
           'browse-url-firefox))
   (message "%s" browse-url-browser-function))
+(defun viogus-sudo-find-file (file dir)
+    (find-file (concat "/sudo:localhost:" (expand-file-name file dir))))
